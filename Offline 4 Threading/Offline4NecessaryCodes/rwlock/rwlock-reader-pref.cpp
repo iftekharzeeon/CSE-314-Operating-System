@@ -28,8 +28,8 @@ void ReaderLock(struct read_write_lock * rw)
   while (rw->writers) {
     pthread_cond_wait(&rw->readLock, &rw->mutexLock);
   }
-  rw->waitingReaders--;
   rw->readers++;
+  rw->waitingReaders--;
   pthread_mutex_unlock(&rw->mutexLock);
 }
 
